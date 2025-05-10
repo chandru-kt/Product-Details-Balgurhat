@@ -1,70 +1,139 @@
-# Getting Started with Create React App
+# Product Details Balurghat (Django & React)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A web application to manage product details (name, description, price). Users can add products via a form, view a list of all products, and see detailed information for each product. This guide covers local setup and development.
 
-## Available Scripts
+**Tech Stack (Local Development):**
+*   **Backend:** Python, Django, Django REST Framework
+*   **Frontend:** React, Axios, React Router
+*   **Database:** SQLite3 (default for Django, created locally)
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Local Setup Instructions
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Prerequisites
+*   Python 3.8+ and Pip
+*   Node.js and npm (or Yarn)
+*   Git
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 1. Clone Repository
+First, clone the repository to your local machine:
+```bash
+git clone <your-repository-url>
+cd simple-product-app
+```
+*(Replace `<your-repository-url>` with the actual URL of your Git repository. If you don't have one yet, you can skip this and create the directories manually as per the project structure.)*
 
-### `npm test`
+### 2. Backend Setup (Django)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   a. **Navigate to Backend Directory:**
+      If you cloned the repository, navigate into the backend folder:
+      ```bash
+      cd backend
+      ```
+      If starting from scratch, create and navigate into your backend project directory.
 
-### `npm run build`
+   b. **Create and Activate Virtual Environment:**
+      It's highly recommended to use a virtual environment for Python projects.
+      ```bash
+      python -m venv venv
+      ```
+      Activate the virtual environment:
+      *   On Windows:
+          ```bash
+          venv\Scripts\activate
+          ```
+      *   On macOS/Linux:
+          ```bash
+          source venv/bin/activate
+          ```
+      *(You should see `(venv)` at the beginning of your terminal prompt, indicating the virtual environment is active.)*
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   c. **Install Dependencies:**
+      Install the required Python packages listed in `requirements.txt`:
+      ```bash
+      pip install -r requirements.txt
+      ```
+      *(If you don't have a `requirements.txt` yet, you'll need to install Django, Django REST Framework, etc., manually: `pip install django djangorestframework django-cors-headers python-dotenv`)*
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   d. **Create `.env` File (for Environment Variables):**
+      Create a file named `.env` in the `backend/` directory. This file will store sensitive information and configurations. For local development, add:
+      ```env
+      # backend/.env
+      DEBUG=True
+      SECRET_KEY='your-strong-unique-development-secret-key-here!' # Replace with a real, unique secret key
+      ```
+      *(**Important:** Replace the `SECRET_KEY` with a strong, unique string. You can generate one easily, e.g., using an online generator or Django's `get_random_secret_key()` function in a Python shell.)*
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   e. **Apply Database Migrations:**
+      Django uses migrations to manage your database schema. For SQLite (the default), this will create a `db.sqlite3` file in your `backend/` directory.
+      ```bash
+      python manage.py makemigrations products
+      python manage.py migrate
+      ```
+      *(Assuming your Django app is named `products`. If it's different, replace `products` accordingly.)*
 
-### `npm run eject`
+   f. **(Optional) Create Superuser:**
+      To access the Django admin interface (available at `/admin/` by default), create a superuser:
+      ```bash
+      python manage.py createsuperuser
+      ```
+      *(Follow the prompts to set a username, email (optional), and password.)*
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   g. **Run Backend Development Server:**
+      Start the Django development server:
+      ```bash
+      python manage.py runserver
+      ```
+      By default, the backend API will be available at `http://127.0.0.1:8000/`. If you created a superuser, the admin panel will be at `http://127.0.0.1:8000/admin/`. The API endpoints (e.g., `/api/products/`) will be accessible under this base URL.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 3. Frontend Setup (React)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+   a. **Navigate to Frontend Directory:**
+      Open a **new terminal window or tab** (keep the backend server running in the other one).
+      If you cloned the repository, navigate into the frontend folder:
+      ```bash
+      cd frontend
+      ```
+      If starting from scratch, create and navigate into your frontend project directory (e.g., using `npx create-react-app frontend`).
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+   b. **Create `.env` File (for API URL):**
+      Create a file named `.env` in the `frontend/` directory. This will tell your React app where the backend API is running:
+      ```env
+      # frontend/.env
+      REACT_APP_API_URL=http://localhost:8000/api
+      ```
 
-## Learn More
+   c. **Install Dependencies:**
+      Install the necessary Node.js packages listed in `package.json`:
+      ```bash
+      npm install
+      ```
+      *(If you use Yarn: `yarn install`)*
+      *(If you don't have a `package.json` yet because you're setting up from scratch, you'll need to install React, React Router, Axios, etc.: `npm install react react-dom react-router-dom axios`)*
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   d. **Run Frontend Development Server:**
+      Start the React development server:
+      ```bash
+      npm start
+      ```
+      *(If you use Yarn: `yarn start`)*
+      The frontend application will typically be available at `http://localhost:3000` and should open automatically in your default web browser.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## Running the Application Locally
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1.  **Start the Backend Server:**
+    *   Open a terminal, navigate to the `backend/` directory.
+    *   Activate the virtual environment (`source venv/bin/activate` or `venv\Scripts\activate`).
+    *   Run `python manage.py runserver`.
 
-### Analyzing the Bundle Size
+2.  **Start the Frontend Server:**
+    *   Open a *new* terminal, navigate to the `frontend/` directory.
+    *   Run `npm start` (or `yarn start`).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+3.  **Access the Application:**
+    Open your web browser and go to `http://localhost:3000` (or the port specified by the React development server).
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+You should now be able to interact with your Simple Product Management application locally.
