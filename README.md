@@ -137,3 +137,13 @@ cd simple-product-app
     Open your web browser and go to `http://localhost:3000` (or the port specified by the React development server).
 
 You should now be able to interact with your Simple Product Management application locally.
+
+---
+
+## Output
+
+![image](https://github.com/user-attachments/assets/b79e18b7-abfc-4fc0-a522-73c10663f4c7)
+![image](https://github.com/user-attachments/assets/e555f4e6-5b12-4d39-b3b5-e5d59c3cf061)
+![image](https://github.com/user-attachments/assets/d819c541-8acc-4fa1-a6e7-0def6967d1ca)
+
+---
